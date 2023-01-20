@@ -1,0 +1,19 @@
+package uk.co.osiris.config;
+
+import java.util.ArrayList;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class Configuration {
+	int	version;
+	String date;
+	String layout;
+	
+	ArrayList<Motor> motors;
+	ArrayList<LineSwitch> lineSwitches;
+	ArrayList<SinglePoint> singlePoints;
+	ArrayList<Sensor> sensors;
+}

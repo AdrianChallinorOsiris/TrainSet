@@ -1,0 +1,8 @@
+package config.copy;
+
+public enum Direction {
+	Clockwise,
+	Anticlockwise,
+	Variable
+
+}

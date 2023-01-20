@@ -1,0 +1,8 @@
+package config.copy;
+
+public abstract class Point {
+	public String		id;
+	public Integer		thruPin;
+	public Integer		branchPin;
+
+}
