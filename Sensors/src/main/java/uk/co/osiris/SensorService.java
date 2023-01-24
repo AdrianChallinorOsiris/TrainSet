@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.pi4j.io.gpio.*;
+import com.pi4j.io.gpio.event.*;
 
 import lombok.extern.slf4j.Slf4j;
 import uk.co.osiris.config.Configuration;
@@ -21,7 +22,9 @@ public class SensorService {
 	private final NodeService nodeService;  
 	private final RestTemplate restTemplate;
 	private final HttpHeaders headers;
+	private final GpioController gpio;
 
+	private ArrayList<GPIOSensor> pinMap;
 	/**
 	 * Initialise the Sensor service 
 	 * 
@@ -33,6 +36,8 @@ public class SensorService {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.add("Accept", "application/json");
 		restTemplate = new RestTemplate();
+		
+		gpio = GpioFactory.getInstance();
 	}
 
 	
@@ -43,17 +48,36 @@ public class SensorService {
 	 * @return
 	 */
 	public Integer configure(Configuration cfg) {
-		ArrayList<GPIOSensor> sensorList = new ArrayList<>();
+		pinMap = new ArrayList<>();
+				
+		/**
+		 * Create a listener for the pins. 
+		 */
+		GpioPinListenerDigital listener  = new GpioPinListenerDigital() {
+            @Override
+            public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
+                log.debug(" --> GPIO PIN STATE CHANGE: {} ", event);
+                PinState state = event.getState();
+                GpioPin pin = event.getPin();
+                String pinName = pin.getName();
+                GPIOSensor sensor = pinMap.stream().filter(x -> x.getPin().getName().equals(pinName)).findFirst().get();
+                sendMessage(sensor.getId(), state.getName());
+            }
+        };
 
-		// final GpioController gpio = GpioFactory.getInstance();
 
 		// Process Sensors
 		for (Sensor s : cfg.getSensors()) {
 			log.info("Build sensor for : {} ", s);
-			// TODO build a sensor here, with a listener.
-
+			Pin pin = Utility.pinID(s.getPin());
+			GpioPinDigitalInput digitalInput =   gpio.provisionDigitalInputPin(pin, PinPullResistance.PULL_DOWN);
+			pinMap.add(new GPIOSensor(s.getId(), digitalInput));
 		}
-		return sensorList.size();
+		
+		GpioPinDigitalInput[] pins = pinMap.stream().map(x -> x.getPin()).toArray(GpioPinDigitalInput[]::new);
+		gpio.addListener(listener, pins);
+		
+		return pinMap.size();
 	}
 
 	/**

@@ -1,15 +1,15 @@
 package uk.co.osiris;
 
 
+
 import com.pi4j.io.gpio.GpioPinDigitalInput;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@Builder
+@AllArgsConstructor
 public class GPIOSensor {
-	String	id;
-	GpioPinDigitalInput gpioPin; 
-	
+	private String id;
+	private GpioPinDigitalInput pin;
 }
