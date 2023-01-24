@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SensorMsg {
-	String name;
+	String id;
 	String state;
 }

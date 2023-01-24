@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "layout",
+    "type": "java.lang.String",
+    "description": "A description for 'layout'"
+  },
+  {
+    "name": "nodes",
+    "type": "java.lang.String",
+    "description": "A description for 'nodes'"
+  },
+  {
+    "name": "timeout",
+    "type": "java.lang.String",
+    "description": "A description for 'timeout'"
+  }
+]}
