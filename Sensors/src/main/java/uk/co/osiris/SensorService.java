@@ -50,15 +50,6 @@ public class SensorService {
 			log.error("Error reading configuration file: {}  = {}", CONFIG, e.getMessage());
 			System.exit(1);
 		}
-		
-//		log.info("Initializing the GPIO");
-//		try {
-//			PlatformManager.setPlatform(Platform.ODROID);
-//			log.info("GPIO platform initialised for ODROID");
-//		} catch (PlatformAlreadyAssignedException e) {
-//			log.error("Error initiating GPIO platform {} ", e.getMessage());
-//		}
-
 		gpio = GpioFactory.getInstance();
 		configure(configuration);
 	}
@@ -79,10 +70,10 @@ public class SensorService {
 		GpioPinListenerDigital listener  = new GpioPinListenerDigital() {
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent event) {
-                log.debug(" --> GPIO PIN STATE CHANGE: {} ", event);
                 PinState state = event.getState();
                 GpioPin pin = event.getPin();
                 String pinName = pin.getName();
+                log.debug(" --> GPIO PIN STATE CHANGE: {} - {} ", pinName,state.getName() );
                 GPIOSensor sensor = pinMap.stream().filter(x -> x.getPin().getName().equals(pinName)).findFirst().get();
                 sendSensorMessage(sensor.getId(), state.getName());
             }
