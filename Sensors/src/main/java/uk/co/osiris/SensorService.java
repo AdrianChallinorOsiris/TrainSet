@@ -92,7 +92,9 @@ public class SensorService {
 		for (Sensor s : cfg.getSensors()) {
 			log.info("Build sensor for : {} ", s);
 			Pin pin = Utility.pinID(s.getPin());
+			log.debug("PIN = {} ", pin);
 			GpioPinDigitalInput digitalInput =   gpio.provisionDigitalInputPin(pin, PinPullResistance.PULL_DOWN);
+			log.debug("Digital Input PIN = {}", digitalInput);
 			pinMap.add(new GPIOSensor(s.getId(), digitalInput));
 		}
 		
