@@ -1,0 +1,17 @@
+{
+	"sensors" : { 
+		"node": "sensors",
+		"port" : 8081, 
+		"timeout" : 500
+	}, 
+	"motors" : { 
+		"node": "motors",
+		"port" : 8081, 
+		"timeout" : 500
+	}, 
+	"points" : { 
+		"node": "points",
+		"port" : 8081, 
+		"timeout" : 500
+	}
+}

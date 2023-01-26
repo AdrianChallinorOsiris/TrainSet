@@ -2,20 +2,14 @@ package uk.co.osiris;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.pi4j.io.gpio.*;
 import com.pi4j.io.gpio.event.*;
-import com.pi4j.platform.Platform;
-import com.pi4j.platform.PlatformAlreadyAssignedException;
-import com.pi4j.platform.PlatformManager;
 
 import lombok.extern.slf4j.Slf4j;
 import uk.co.osiris.common.*;
@@ -61,7 +55,7 @@ public class SensorService {
 	 * @param cfg
 	 * @return
 	 */
-	public Integer configure(Configuration cfg) {
+	private Integer configure(Configuration cfg) {
 		pinMap = new ArrayList<>();
 				
 		/**
@@ -93,6 +87,10 @@ public class SensorService {
 		gpio.addListener(listener, pins);
 		
 		return pinMap.size();
+	}
+	
+	public ArrayList<Sensor> getSensors() { 
+		return configuration.getSensors();
 	}
 
 	/**

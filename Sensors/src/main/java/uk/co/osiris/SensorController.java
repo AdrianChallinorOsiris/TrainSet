@@ -1,11 +1,11 @@
 package uk.co.osiris;
 
+import java.util.ArrayList;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import uk.co.osiris.config.Configuration;
+import uk.co.osiris.config.Sensor;
 
 @RestController
 public class SensorController {
@@ -15,9 +15,9 @@ public class SensorController {
 		this.svc = svc; 
 	}
 	
-	@PostMapping("/configuration")
-	public Integer configuration(@RequestBody Configuration cfg ) { 
-		return svc.configure(cfg);
+	@GetMapping("/sensors")
+	public ArrayList<Sensor> configuration( ) { 
+		return svc.getSensors();
 	}
 	
 	@GetMapping("/test") 
