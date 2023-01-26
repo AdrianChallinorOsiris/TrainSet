@@ -39,9 +39,8 @@ public class SensorService {
 		this.sender = sender; 
 		
 		try {
-			Path path = ResourceUtils.getFile(CONFIG).toPath();
 
-			File configFile = path.toFile();
+			File configFile = new File(CONFIG);
 			JsonMapper mapper = JsonMapper.builder()
 					.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true).build();
 			configuration = mapper.readValue(configFile, Configuration.class);

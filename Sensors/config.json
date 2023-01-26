@@ -2,9 +2,11 @@
 	"version": 1,
 	"date": "4-Jan-2024",
 	"layout": "Single Board v6",
-	"controller" : "bastet",
-	"port" : 8080, 
-	"timeout" : 500, 
+	"controller" : {
+		"node": "bastet",
+		"port" : 8080, 
+		"timeout" : 500
+	}, 
 	"sensors": [
 		{
 			"id": "S01",
