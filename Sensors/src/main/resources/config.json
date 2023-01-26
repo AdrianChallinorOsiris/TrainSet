@@ -1,0 +1,22 @@
+{
+	"version": 1,
+	"date": "4-Jan-2024",
+	"layout": "Single Board v6",
+	"controller" : "bastet",
+	"port" : 8080, 
+	"timeout" : 500, 
+	"sensors": [
+		{
+			"id": "S01",
+			"pin": 1,
+			"section": "up",
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S02",
+			"pin": 2, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}
+	]
+}

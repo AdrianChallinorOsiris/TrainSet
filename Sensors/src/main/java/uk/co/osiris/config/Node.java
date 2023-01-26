@@ -1,15 +1,14 @@
-package uk.co.osiris.messages;
+package uk.co.osiris.config;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SensorMsg {
-	String id;
-	String state;
+public class Node {
+	String node;
+	Integer port;
+	Integer timeout;
 }

@@ -1,28 +1,31 @@
 package uk.co.osiris;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.pi4j.io.gpio.*;
 import com.pi4j.io.gpio.event.*;
+import com.pi4j.platform.Platform;
+import com.pi4j.platform.PlatformAlreadyAssignedException;
+import com.pi4j.platform.PlatformManager;
 
 import lombok.extern.slf4j.Slf4j;
-import uk.co.osiris.config.Configuration;
-import uk.co.osiris.config.Sensor;
-import uk.co.osiris.messages.SensorMsg;
+import uk.co.osiris.common.*;
+import uk.co.osiris.config.*;
 
 @Service
 @Slf4j
 public class SensorService {
-	private final NodeService nodeService;  
-	private final RestTemplate restTemplate;
-	private final HttpHeaders headers;
 	private final GpioController gpio;
+	private static final  String CONFIG = "config.json" ;
+	private Configuration configuration = null;
+	private MessageSender sender;
 
 	private ArrayList<GPIOSensor> pinMap;
 	/**
@@ -30,14 +33,31 @@ public class SensorService {
 	 * 
 	 * @param nodeService
 	 */
-	public SensorService(NodeService nodeService) {
-		this.nodeService = nodeService;
-		headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.add("Accept", "application/json");
-		restTemplate = new RestTemplate();
+	public SensorService(MessageSender sender) {
+		this.sender = sender; 
 		
+		try {
+			File configFile = new ClassPathResource(CONFIG).getFile();
+			JsonMapper mapper = JsonMapper.builder()
+					.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true).build();
+			configuration = mapper.readValue(configFile, Configuration.class);
+			log.info("Loaded {} Configuration", configuration.getLayout());
+			
+		} catch (IOException e) {
+			log.error("Error reading configuration file: {}  = {}", CONFIG, e.getMessage());
+			System.exit(1);
+		}
+		
+		log.info("Initializing the GPIO");
+		try {
+			PlatformManager.setPlatform(Platform.ODROID);
+			log.info("GPIO platform initialised for ODROID");
+		} catch (PlatformAlreadyAssignedException e) {
+			log.error("Error initiating GPIO platform {} ", e.getMessage());
+		}
+
 		gpio = GpioFactory.getInstance();
+
 	}
 
 	
@@ -61,10 +81,9 @@ public class SensorService {
                 GpioPin pin = event.getPin();
                 String pinName = pin.getName();
                 GPIOSensor sensor = pinMap.stream().filter(x -> x.getPin().getName().equals(pinName)).findFirst().get();
-                sendMessage(sensor.getId(), state.getName());
+                sendSensorMessage(sensor.getId(), state.getName());
             }
         };
-
 
 		// Process Sensors
 		for (Sensor s : cfg.getSensors()) {
@@ -86,9 +105,9 @@ public class SensorService {
 	 * @throws InterruptedException
 	 */
 	public void doTest() throws InterruptedException {
-		sendMessage("S01", "HIGH");
+		sendSensorMessage("S01", "HIGH");
 		Thread.sleep(2000);
-		sendMessage("S01", "LOW");
+		sendSensorMessage("S01", "LOW");
 	}
 	
 	/**
@@ -97,18 +116,10 @@ public class SensorService {
 	 * @param id
 	 * @param state
 	 */
-	public void sendMessage(String id, String state) { 
+	public void sendSensorMessage(String id, String state) { 
 		SensorMsg sm = SensorMsg.builder().id(id).state(state).build();
-		Node controller = nodeService.getController();
-		if (nodeService.isReachable(controller)) { 
-			String url = controller.getUrl("sensor");
-			HttpEntity<SensorMsg> requestEntity = new HttpEntity<>(sm, headers);
+		sender.sendSensorMessage(configuration.getController(), sm);
+		
 
-			restTemplate.postForEntity(url, requestEntity, null);
-			log.info("Sent sensor message: {}", sm);
-		}
-		else { 
-			log.warn("Sensor message not sent - controller is not reachable");
-		}
 	}
 }

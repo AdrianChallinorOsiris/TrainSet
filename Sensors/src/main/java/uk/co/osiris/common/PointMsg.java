@@ -1,4 +1,4 @@
-package uk.co.osiris.messages;
+package uk.co.osiris.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Point {
+public class PointMsg {
 	private String id;
 	private String name; 
 	private boolean branch; 

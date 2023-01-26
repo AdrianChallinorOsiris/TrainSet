@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
+import uk.co.osiris.common.SensorMsg;
 import uk.co.osiris.messages.*;
 
 @RestController
