@@ -11,6 +11,13 @@ public class Utility {
 		String pinname = String.format("GPIO_%02d", pinnumber);
 		log.debug("Creating pin: {} ", pinname);
 		Pin pin = RaspiPin.getPinByName(pinname);
+		if (pin == null) { 
+			log.error("PIN was found to be null");
+			
+			Pin pin2 = RaspiPin.GPIO_02;
+			log.error("pin2 = {}", pin2);
+			System.exit(0);
+		}
 		return pin;
 	}
 
