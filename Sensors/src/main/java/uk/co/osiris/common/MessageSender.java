@@ -41,7 +41,7 @@ public class MessageSender {
 	}
 	
 	private String buildURL(Node node, String endpoint) {
-		return node.getNode() + ":" + node.getPort() + "/" + endpoint;
+		return "http://" + node.getNode() + ":" + node.getPort() + "/" + endpoint;
 	}
 	
 	private boolean isReachable(Node node) { 
