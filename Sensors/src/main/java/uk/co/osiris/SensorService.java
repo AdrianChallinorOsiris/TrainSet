@@ -60,7 +60,7 @@ public class SensorService {
 		}
 
 		gpio = GpioFactory.getInstance();
-
+		configure(configuration);
 	}
 
 	
