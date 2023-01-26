@@ -2,10 +2,12 @@ package uk.co.osiris;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -37,7 +39,9 @@ public class SensorService {
 		this.sender = sender; 
 		
 		try {
-			File configFile = new ClassPathResource(CONFIG).getFile();
+			Path path = ResourceUtils.getFile(CONFIG).toPath();
+
+			File configFile = path.toFile();
 			JsonMapper mapper = JsonMapper.builder()
 					.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true).build();
 			configuration = mapper.readValue(configFile, Configuration.class);
