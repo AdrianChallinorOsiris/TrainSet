@@ -51,13 +51,13 @@ public class SensorService {
 			System.exit(1);
 		}
 		
-		log.info("Initializing the GPIO");
-		try {
-			PlatformManager.setPlatform(Platform.ODROID);
-			log.info("GPIO platform initialised for ODROID");
-		} catch (PlatformAlreadyAssignedException e) {
-			log.error("Error initiating GPIO platform {} ", e.getMessage());
-		}
+//		log.info("Initializing the GPIO");
+//		try {
+//			PlatformManager.setPlatform(Platform.ODROID);
+//			log.info("GPIO platform initialised for ODROID");
+//		} catch (PlatformAlreadyAssignedException e) {
+//			log.error("Error initiating GPIO platform {} ", e.getMessage());
+//		}
 
 		gpio = GpioFactory.getInstance();
 		configure(configuration);
