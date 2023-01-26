@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Utility {
 	public static Pin pinID(Integer pinnumber) { 
-		String pinname = "GPIO_" + pinnumber.toString();
+		String pinname = String.format("GPIO_%02d", pinnumber);
 		log.debug("Creating pin: {} ", pinname);
 		Pin pin = RaspiPin.getPinByName(pinname);
 		return pin;
