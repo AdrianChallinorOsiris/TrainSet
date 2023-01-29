@@ -17,7 +17,7 @@ import uk.co.osiris.config.*;
 public class FatService {
 	private static final  String CONFIG = "config.json" ;
 	private Configuration configuration = null;
-	private MessageSender sender;
+	private MessageSender  sender;
 
 	ArrayList<Sensor> sensors;
 
@@ -35,6 +35,7 @@ public class FatService {
 			
 			// TODO get config from nodes 
 			sensors = sender.getSensors(configuration.getSensors());
+			log.info("Senors reported {} detection points", sensors.size());
 			
 		} catch (IOException e) {
 			log.error("Error reading configuration file: {}  = {}", CONFIG, e.getMessage());

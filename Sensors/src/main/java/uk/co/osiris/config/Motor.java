@@ -10,4 +10,5 @@ public class Motor {
 	private String name;
 	private Integer ena;
 	private Integer dir;
+	
 }
