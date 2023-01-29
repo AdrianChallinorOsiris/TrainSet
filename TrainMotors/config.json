@@ -1,0 +1,48 @@
+{
+	"version": 1,
+	"date": "4-Jan-2024",
+	"layout": "Single Board v6",
+	"controller": {
+		"node": "bastet",
+		"port": 8080,
+		"timeout": 500
+	},
+	"motors": [
+		{
+			"id": "M01",
+			"section": "Branch",
+			"ena": 1,
+			"dir": 2
+		},
+		{
+			"id": "M02",
+			"section": "Down",
+			"ena": 3,
+			"dir": 4
+		},
+		{
+			"id": "M03",
+			"section": "Up",
+			"ena": 5,
+			"dir": 6
+		},
+		{
+			"id": "M04",
+			"section": "Loop",
+			"ena": 7,
+			"dir": 8
+		},
+		{
+			"id": "M05",
+			"section": "Sidings",
+			"ena": 9,
+			"dir": 10
+		},
+		{
+			"id": "M06",
+			"section": "Other",
+			"ena": 11,
+			"dir": 12
+		}
+	]
+}
