@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Motor {
 	private String id;
-	private String name;
+	private String section;
 	private Integer ena;
 	private Integer dir;
 	
