@@ -19,6 +19,96 @@
 			"pin": 2, 
 			"section": "up", 
 			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S03",
+			"pin": 3, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S04",
+			"pin": 4, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S05",
+			"pin": 5, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S06",
+			"pin": 6, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S07",
+			"pin": 7, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S08",
+			"pin": 8, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S92",
+			"pin": 9, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S10",
+			"pin": 10, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S11",
+			"pin": 11, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S12",
+			"pin": 12, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S13",
+			"pin": 13, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S14",
+			"pin": 14, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S15",
+			"pin": 16, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S17",
+			"pin": 21, 
+			"section": "up", 
+			"description": "prior to point P02"
+		}, 
+		{
+			"id": "S18",
+			"pin": 22, 
+			"section": "up", 
+			"description": "prior to point P02"
 		}
 	]
 }
