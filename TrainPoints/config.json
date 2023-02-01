@@ -1,0 +1,104 @@
+{
+	"version": 1,
+	"date": "4-Jan-2024",
+	"layout": "Single Board v6",
+	"controller": {
+		"node": "bastet",
+		"port": 8080,
+		"timeout": 500
+	},
+	"points": [
+		{
+			"id": "P01",
+			"thruPin": 1,
+			"branchPin": 2,
+			"clockwise" : {
+				"inSection" : "branch", 
+				"thruSection" : "branch"
+			},
+			"anticlockwise" : {
+				"inSection" : "down", 
+				"thruSection" : "down"			
+			}
+		},
+		{
+			"id": "P02",
+			"thruPin": 3,
+			"branchPin": 4,
+			"clockwise" : {
+				"inSection" : "down", 
+				"thruSection" : "down"
+			},
+			"anticlockwise" : {
+				"inSection" : "up", 
+				"thruSection" : "up"			
+			}
+		},
+		{
+			"id": "P03",
+			"thruPin": 5,
+			"branchPin": 6,
+			"clockwise" : {
+				"inSection" : "up", 
+				"thruSection" : "up"
+			},
+			"anticlockwise" : {
+				"inSection" : "branch", 
+				"thruSection" : "branch"			
+			}
+		},
+		{
+			"id": "P04",
+			"thruPin": 7,
+			"branchPin": 8,
+			"clockwise" : {
+				"inSection" : "down", 
+				"thruSection" : "down"
+			},
+			"anticlockwise" : {
+				"inSection" : "branch", 
+				"thruSection" : "branch"			
+			}
+		},	
+		{
+			"id": "P05",
+			"thruPin": 9,
+			"branchPin": 10,
+			"clockwise" : {
+				"inSection" : "branch", 
+				"thruSection" : "branch",
+				"branchSection" : "loop"
+			}
+		},		
+		{
+			"id": "P06",
+			"thruPin": 11,
+			"branchPin": 12,
+			"clockwise" : {
+				"inSection" : "branch", 
+				"thruSection" : "branch",
+				"branchSection" : "siding"
+			}
+		},			
+		{
+			"id": "P07",
+			"thruPin": 13,
+			"branchPin": 14,
+			"clockwise" : {
+				"inSection" : "siding", 
+				"thruSection" : "singing A-B",
+				"branchSection" : "siding C"
+			}
+		},		
+		{
+			"id": "P08",
+			"thruPin": 15,
+			"branchPin": 16,
+			"clockwise" : {
+				"inSection" : "singing A-B", 
+				"thruSection" : "siding A",
+				"branchSection" : "siding B"
+			}
+		}
+	]
+}
