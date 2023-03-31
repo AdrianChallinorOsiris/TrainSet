@@ -16,8 +16,7 @@ import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.osiris.common.MotorMsg;
 import uk.co.osiris.common.Utility;
-import uk.co.osiris.config.Configuration;
-import uk.co.osiris.config.Motor;
+import uk.co.osiris.config.*;
 
 @Service
 @Slf4j
@@ -37,8 +36,7 @@ public class TrainPointService {
 	 * 
 	 * @param sender
 	 */
-	public TrainPointService() { 
-		
+	public TrainPointService() { 	
 		try {
 
 			File configFile = new File(CONFIG);
@@ -50,6 +48,8 @@ public class TrainPointService {
 					configuration.pcount(), 
 					configuration.scount(),
 					configuration.mcount());
+			
+			
 			
 		} catch (IOException e) {
 			log.error("Error reading configuration file: {}  = {}", CONFIG, e.getMessage());
@@ -63,8 +63,8 @@ public class TrainPointService {
 	 * Respond to the Fat Controller when he asks what motors we have 
 	 * @return
 	 */
-	public ArrayList<Motor> getMotors() {
-		return configuration.getMotors();
+	public ArrayList<Point> getPoint() {
+		return configuration.getPoints();
 
 	}
 
